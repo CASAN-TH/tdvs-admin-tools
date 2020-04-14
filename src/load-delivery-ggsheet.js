@@ -63,10 +63,11 @@ async function sendRequest(item, index) {
             if (err) {
                 console.log("error : " + err.value);
             } else {
-                // console.log(body);
+                var returnData = JSON.parse(res.body);
                 console.log("status :" + res.statusCode);
-            }
-                
+                console.log(returnData.data.personalInfo.firstNameThai + " " 
+                            + returnData.data.personalInfo.lastNameThai);
+            }       
         }     
     );
 
@@ -78,8 +79,10 @@ async function sendRequest(item, index) {
  * @param {string} txt 
  */
 function cleanText(txt) {
-    var patt = /(\n|\r|\t|\u200b)/g;
-    return txt.replace(patt, "");
+    if (typeof(txt) === "string") {
+        return txt.replace(/(\n|\r|\t|\u200b)/g, "");
+    }
+    return txt;
 }
 
 /**
@@ -115,7 +118,7 @@ async function toInvoledParty(item) {
     // Mobile 
     // Remove - and space
     var phone = cleanText(item.phonenumber);
-    phone = phone.replace(/-|\s/g, "");
+    phone = phone.replace(/(-|\s)/g, "");
 
     involvedParty.directContact = [];
     involvedParty.directContact.push(
