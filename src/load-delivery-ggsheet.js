@@ -30,7 +30,7 @@ const URL_POST = "https://tvds-service.herokuapp.com/api/involvedPartys";
     // index 0  variable for awesome table
     // index 1 start data
     var data = await sheet.getRows();
-    //var data = await sheet.getRows({limit:5, offset:275});
+    // var data = await sheet.getRows({limit:1, offset:1});
 
     // Send post request to REST API
     await data.forEach(sendRequest);
@@ -70,7 +70,7 @@ async function sendRequest(item, index) {
         }     
     );
 
-    console.log(JSON.stringify(involvedParty));
+    // console.log(JSON.stringify(involvedParty));
 }
 
 /**
