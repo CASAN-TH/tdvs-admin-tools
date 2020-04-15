@@ -8,8 +8,8 @@ const request = require('request');
 const utils = require('./utils');
 
 // Delivery sheet 
-const DELIVERY_GGSHEET_ID = '1jhnR4pC7wa9R1QVSDLPVlFml3K_7k87XIrWKVSA4f_8';
-const DELIVERY_SHEET_ID = 1181304633;
+const DELIVERY_GGSHEET_ID = '1hGcUIWXT9YeZC2Gy9XVYGxlC3KsKH_JBoQbToG6SNFw';
+const DELIVERY_SHEET_ID = 0;
 const URL_POST = "https://tvds-service.herokuapp.com/api/involvedPartys";
 // const URL_POST = "http://localhost:3000/api/involvedPartys";
 
@@ -30,14 +30,20 @@ const URL_POST = "https://tvds-service.herokuapp.com/api/involvedPartys";
     // Get All data from google sheet
     // index 0  variable for awesome table
     // index 1 start data
-    var data = await sheet.getRows();
-    // var data = await sheet.getRows({limit:1, offset:2});
+    try {
+        //var data = await sheet.getRows();
+        var data = await sheet.getRows({limit:5, offset:0});
+        // var data = await sheet.loadCells();
+        // var cell = sheet.getCell(1, 0);
+        // console.log(cell.value);
 
-    // Send post request to REST API
-    await data.forEach(sendRequest);
+        // Send post request to REST API
+        await data.forEach(sendRequest);
 
-    // TODO : update Flag in delivery google sheet
-  
+        // TODO : update Flag in delivery google sheet
+    } catch (error) {
+        console.log(error);
+    } 
 })();
 
 /**
@@ -48,7 +54,7 @@ const URL_POST = "https://tvds-service.herokuapp.com/api/involvedPartys";
 async function sendRequest(item, index) {
 
     // Empty name is not process
-    if (item.name == "") return;
+    if (item.shareholder_id == "") return;
     
     var involvedParty = await toInvoledParty(item);
     
@@ -76,53 +82,48 @@ async function sendRequest(item, index) {
 }
 
 /**
- * clean \n \r \t \u200b within text
- * @param {string} txt 
- */
-function cleanText(txt) {
-    if (typeof(txt) === "string") {
-        return txt.replace(/(\n|\r|\t|\u200b)/g, "");
-    }
-    return txt;
-}
-
-/**
  * Convert Data GoogleSpreadSheetRow to InvolvedParty Javascript Ojbect
  * @param { GoogleSpreadSheetRow }item is row data of GoogleSpreadSheetRow
  * @returns Involed Party javacript object
  */
 async function toInvoledParty(item) {
     var involvedParty = {
+
         personalInfo : {
             titleThai: item.title,
             firstNameThai: utils.cleanText(item.firstname),
             lastNameThai: utils.cleanText(item.lastname)
         },
-        contactAddress : {
+        registeredAddress : {
             addressLine1: utils.cleanText(item.address) + ' ' + utils.cleanText(item.soi),
             addressStreet: utils.cleanText(item.street),
             addressSubDistrict: utils.cleanText(item.subdistrict),
             addressDistrict: utils.cleanText(item.district),
             addressProvince: utils.cleanText(item.province),
             addressPostalCode: item.postalcode,
-            latitude: item.Latitude,
-            longitude: item.Longtitude
         },
         membership: [
             {
-                activity: "delivery",
-                memberReference: ""
+                activity: "shareholder",
+                memberReference: item.shareholder_id
             }
         ]
     };
+    // ID CARD
+    if (item.idcard) {
+        var idcard = utils.cleanText(item.idcard);
+        idcard = idcard.replace(/(-|\s)/g, "");
+        involvedParty.taxID = idcard;
+        // console.log(idcard);
+    }
 
     // Mobile 
     // Remove - and space
-    if (item.phonenumber) {
-        var phone = utils.cleanText(item.phonenumber);
+    involvedParty.directContact = [];
+    if (item.phone_number) {
+        // console.log(typeof(item.phone_number));
+        var phone = utils.cleanText(item.phone_number);
         phone = phone.replace(/(-|\s)/g, "");
-    
-        involvedParty.directContact = [];
         involvedParty.directContact.push(
             {
                 method: "mobile", 
@@ -130,13 +131,12 @@ async function toInvoledParty(item) {
             }
         );
     }
-    
-    // Check isshareholder
-    if (item.isshareholder == "TRUE") {
-        involvedParty.membership.push(
+
+    if (item.email) {
+        involvedParty.directContact.push(
             {
-                activity: "shareholder",
-                memberReference: ""
+                method: "email", 
+                value: item.email
             }
         );
     }
