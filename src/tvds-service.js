@@ -18,12 +18,6 @@ exports.request = request;
 exports.sendQuery = function(firstNameThai, lastNameThai, mobileNumber) {
     return new Promise((resolve, reject) => {
 
-        // one of three not string
-        //if (!(typeof(firstNameThai) === "string" && typeof(lastNameThai) === "string" &&
-        //    typeof(mobileNumber) === "string"))
-        //{
-        //    reject(new Error("parameter not string"));
-        //}
         // Crete Query value
         var queryBody = {};
         queryBody.firstNameThai = firstNameThai || " ";
