@@ -64,8 +64,9 @@ const DELIVERY_SHEET_ID = 0;
             await involvedParty.fromShareholder(item);
             phone = involvedParty.getMobileNumber();
 
-            //console.log("--involved party--");
-            //console.log(involvedParty);
+            // console.log("--involved party--");
+            // console.log(involvedParty);
+
             if (phone.length > 0) {
                 for (x of phone) {  
                     // console.log(x.value);

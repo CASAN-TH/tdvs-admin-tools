@@ -17,6 +17,7 @@ function InvolvedParty() {
     this.membership = [];
     this.directContact = [];
     this.ipIPRelationship = [];
+    this.bankAccount = [];
     this.taxID = "";
 
     /**
@@ -68,7 +69,19 @@ function InvolvedParty() {
             addressProvince: utils.cleanText(item.province),
             addressPostalCode: utils.cleanText(item.postalcode),
         },
+        // Shareholder Membership
         this.addShareholderMemberShip(item.shareholder_id);
+
+        // Bank account
+        if (item.bankID) {
+            this.bankAccount.push({
+                bankID: item.bankID,
+                bankAccountNumber: utils.cleanText(item.bankaccount),
+                bankAccountName: utils.cleanText(item.bankaccount_name),
+                activity: "",
+                purpose: ""
+            });
+        }
     
         // ID CARD
         if (item.idcard) this.taxID = this.cleanTaxID(item.idcard);
