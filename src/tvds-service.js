@@ -1,9 +1,10 @@
-const URI_CREATE = "https://tvds-service.herokuapp.com/api/involvedPartys";
-const URI_UPDATE = "https://tvds-service.herokuapp.com/api/involvedPartys/";
-const URI_QUERY = "https://tvds-service.herokuapp.com/api/involvedPartys/query";
-// const URI_CREATE = "https://casan-sevice.lamunphan.com/api/involvedPartys";
-// const URI_UPDATE = "https://casan-sevice.lamunphan.com/api/involvedPartys/";
-// const URI_QUERY = "https://casan-sevice.lamunphan.com/api/involvedPartys/query";
+
+//const URI_CREATE = "https://tvds-service.herokuapp.com/api/involvedPartys";
+//const URI_UPDATE = "https://tvds-service.herokuapp.com/api/involvedPartys/";
+//const URI_QUERY = "https://tvds-service.herokuapp.com/api/involvedPartys/query";
+const URI_CREATE = "https://tvds-service-prod-7lgq2xsobq-de.a.run.app/api/involvedPartys";
+const URI_UPDATE = "https://tvds-service-prod-7lgq2xsobq-de.a.run.app/api/involvedPartys/";
+const URI_QUERY = "https://tvds-service-prod-7lgq2xsobq-de.a.run.app/api/involvedPartys/query";
 // const URL_POST = "http://localhost:3000/api/involvedPartys";
 
 const request = require('request');

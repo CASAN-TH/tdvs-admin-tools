@@ -96,8 +96,8 @@ const DELIVERY_SHEET_ID = 1181304633;
                 
                 // console.log(bodyReturn);
                 console.log("--update -- row :"+ index + " " + newInvolvedParty.personalInfo.firstNameThai);
-            //    console.log("--update merge involveparty");
-            //    console.log(dataReturn.data);
+                // console.log("--update merge involveparty");
+                // console.log(bodyReturn);
             } else {
                  // Create new data
                 // 

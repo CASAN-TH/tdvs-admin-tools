@@ -64,8 +64,8 @@ const DELIVERY_SHEET_ID = 0;
             await involvedParty.fromShareholder(item);
             phone = involvedParty.getMobileNumber();
 
-            // console.log("--involved party--");
-            // console.log(involvedParty);
+            //console.log("--involved party--");
+            //console.log(JSON.stringify(involvedParty));
 
             if (phone.length > 0) {
                 for (x of phone) {  
@@ -100,15 +100,15 @@ const DELIVERY_SHEET_ID = 0;
                 // console.log(bodyReturn);
                 console.log("--update -- row :"+ index + " " + newInvolvedParty.personalInfo.firstNameThai);
                 // console.log("--update merge involveparty");
-                // console.log(dataReturn.data);
+                // console.log(bodyReturn);
             } else {
                 // Create new data
                 bodyReturn = await tvdsService.sendCreate(JSON.stringify(involvedParty));
                 console.log("--create -- row :" + index + " " + involvedParty.personalInfo.firstNameThai);
             }
 
-            // console.log("--body return --");
-            // console.log(bodyReturn);
+            //console.log("--body return --");
+            //console.log(bodyReturn);
         } catch (error) {
             console.log(error);
             continue;
