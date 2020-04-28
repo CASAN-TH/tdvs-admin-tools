@@ -7,7 +7,7 @@ const cred = require('./thamturakit-data-center-credential.json');
 // const request = require('request');
 // const utils = require('./utils');
 const tvdsService = require('./tvds-service');
-const InvolvedParty = require('./involvedparty');
+const InvolvedParty = require('../modules/involvedparty');
 
 // Delivery sheet 
 const DELIVERY_GGSHEET_ID = '1jhnR4pC7wa9R1QVSDLPVlFml3K_7k87XIrWKVSA4f_8';

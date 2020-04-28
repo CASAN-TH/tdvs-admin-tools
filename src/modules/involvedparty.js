@@ -1,4 +1,4 @@
-const utils = require('./utils');
+const utils = require('../load-gghseet/utils');
 
 // InvolvedParty keyword
 const IP_TXT = {
@@ -7,7 +7,8 @@ const IP_TXT = {
     mobileNumber: "mobile",
     homeNumber: "home",
     otherNumber: "other",
-    email: "email"
+    email: "email",
+    lineUserId: "lineUserId"
 }
 
 function InvolvedParty() {
@@ -247,6 +248,40 @@ function InvolvedParty() {
         return number;
     };
 
+    /**
+     * Get Line User iD
+     */
+    this.getLineUserId = function() {
+        if (this.directContact.length == 0)  return [];
+
+        id = this.directContact.filter((value, index, array) => {
+            return value.method === IP_TXT.lineUserId;
+        });
+
+        return (id.length > 0) ? id[0].value : '';
+    };
+
+    /**
+     * Check is shareholder
+     */
+    this.isShareholder = function() {
+        var i = this.membership.findIndex((value, index, arrary) => {
+            return value.activity === IP_TXT.shareholder
+        });
+
+        return (i >= 0) ? true : false;
+    }
+
+    /**
+     * Get sharholder reference
+     */
+    this.getShareholderRefer = function () {
+        var item = this.membership.filter((value, index, arrary) => {
+                return value.activity === IP_TXT.shareholder
+        });
+
+        return (item) ? item[0].memberReference : '';
+    }
 
     /**
      * update newData to this object

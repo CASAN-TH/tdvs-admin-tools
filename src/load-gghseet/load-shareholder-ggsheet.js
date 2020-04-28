@@ -6,7 +6,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 const cred = require('./thamturakit-data-center-credential.json');
 const utils = require('./utils');
 const tvdsService = require('./tvds-service');
-const InvolvedParty = require('./involvedparty');
+const InvolvedParty = require('../modules/involvedparty');
 
 // Delivery sheet 
 const DELIVERY_GGSHEET_ID = '1hGcUIWXT9YeZC2Gy9XVYGxlC3KsKH_JBoQbToG6SNFw';
