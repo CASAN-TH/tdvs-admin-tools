@@ -1,3 +1,11 @@
+/**
+ * Check tvdscustomer isShareHolder field with InvolvedParty collection
+ * command line:
+ *  node ./src/...                               --> update all tvdscustomer
+ *  node ./src/... "startdate"                   --> update by create/update at startdate
+ *  node ./src/... "startdate" "enddate"         --> update by create/update start at startdate end at enddate
+ *  create date : 29/4/2020
+ */
 'use strict'
 
 const db = require('../config/mongoose');
