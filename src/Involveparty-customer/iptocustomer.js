@@ -30,20 +30,20 @@ const Tvdscustomer = require('../modules/tvdscustomer');
 
                 var ip = new InvolvedParty();
                 ip.update(data);
+                // console.log(data);
 
                 var customer = new Tvdscustomer();
                 customer.fromInvolvedParty(ip);
                 
-                console.log(JSON.stringify(customer));
+                // console.log(JSON.stringify(customer));
                 var newTvdscustomer = new TvdscustomerCol(customer);
-                await newTvdscustomer.save();
-                console.log(`save success row : ${row} -- ${customer.firstName}`);
+                // await newTvdscustomer.save();
+                console.log(`save success row : ${row} -- ${customer.firstName} ${customer.lastName}`);
             } catch(err) {
                 console.log(err);
-                //continue;
+                continue;
             }
         }
-
 
         db.disconnect();
     } catch (err) {

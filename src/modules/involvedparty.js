@@ -252,7 +252,7 @@ function InvolvedParty() {
      * Get Line User iD
      */
     this.getLineUserId = function() {
-        if (this.directContact.length == 0)  return [];
+        if (this.directContact.length == 0)  return '';
 
         id = this.directContact.filter((value, index, array) => {
             return value.method === IP_TXT.lineUserId;
@@ -290,8 +290,13 @@ function InvolvedParty() {
     this.update = function(newData) {
         this.taxID = newData.taxID;
         Object.assign(this.personalInfo, newData.personalInfo);
-        Object.assign(this.contactAddress, newData.contactAddress);
-        Object.assign(this.registeredAddress, newData.registeredAddress);
+        if (newData.contactAddress) {
+            Object.assign(this.contactAddress, newData.contactAddress);
+        }
+
+        if (newData.registeredAddress) {
+            Object.assign(this.registeredAddress, newData.registeredAddress);
+        }
 
         var i, x;
         // Membership
@@ -312,6 +317,11 @@ function InvolvedParty() {
             });
             // Add new number
             if (i < 0) this.directContact.push(x);
+        }
+
+        this.created = newData.created;
+        if (newData.updated) {
+            this.updated = newData.updated;
         }
     };
 }
