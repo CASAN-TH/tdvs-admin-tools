@@ -288,6 +288,9 @@ function InvolvedParty() {
      * @param {InvolvedParty} newData
      */
     this.update = function(newData) {
+        
+        // console.log(newData.membership);
+
         this.taxID = newData.taxID;
         Object.assign(this.personalInfo, newData.personalInfo);
         if (newData.contactAddress) {

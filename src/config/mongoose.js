@@ -7,6 +7,7 @@ module.exports.connection = function (cb) {
     // MONGODB_URI = "mongodb://localhost:27017/database";
     // mongoose.set('debug', process.env.MONGO_DB_URI || process.env.MONGODB_URI ? false : true);
     var db = mongoose.connect(MONGODB_URI,{ useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+        console.log(MONGODB_URI);
         if (err) {
             console.log("MongoDB Notconnected..." + err);
         } else {
@@ -14,7 +15,6 @@ module.exports.connection = function (cb) {
                 cb()
             } else {
                 console.log("MongoDB Connected...");
-                console.log(MONGODB_URI);
             }
         }
 

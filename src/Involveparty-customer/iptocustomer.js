@@ -37,7 +37,7 @@ const Tvdscustomer = require('../modules/tvdscustomer');
                 
                 // console.log(JSON.stringify(customer));
                 var newTvdscustomer = new TvdscustomerCol(customer);
-                // await newTvdscustomer.save();
+                await newTvdscustomer.save();
                 console.log(`save success row : ${row} -- ${customer.firstName} ${customer.lastName}`);
             } catch(err) {
                 console.log(err);
