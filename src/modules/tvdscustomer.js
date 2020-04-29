@@ -24,7 +24,7 @@ function Tvdscustomer() {
              return;       
         }
 
-        this.title = item.personalInfo.title;
+        this.title = item.personalInfo.titleThai;
         this.firstName = item.personalInfo.firstNameThai;
         this.lastName = item.personalInfo.lastNameThai;
         this.displayName = `${this.firstName} ${this.lastName}`;

@@ -103,6 +103,41 @@ function InvolvedParty() {
         if (item.email) this.addEmail(item.email);
     };
 
+    this.fromTvdscustomer = function(item) {
+        if (!item) {
+            return;
+        }
+
+        this.taxID = item.persanalId;
+
+        this.personalInfo = {
+            titleThai: item.title,
+            firstNameThai: item.firstName,
+            lastNameThai: item.lastName
+        };
+
+        this.contactAddress = {
+            addressLine1: item.addressLine1,
+            addressStreet: item.addressStreet,
+            addressSubDistrict: item.addressSubDistrict,
+            addressDistrict: item.addressDistrict,
+            addressProvince: item.addressProvince,
+            addressPostalCode: item.addressPostalCode,
+            latitude: item.latitude,
+            longitude: item.longitude
+        };
+
+        if (item.lineUserId) {
+            this.addLineUserId(item.lineUserId);
+        }
+
+        this.addPhoneNumber(item.mobileNo1);
+        this.addPhoneNumber(item.mobileNo2);
+        this.addPhoneNumber(item.mobileNo3);
+        
+        // Don't add share holder because lose memberreference data
+    }
+
     /**
      * clean phone number string : delect - and space
      * @param {string} str is phone number string
@@ -247,6 +282,18 @@ function InvolvedParty() {
 
         return number;
     };
+
+    /**
+     * Add direct contact field of line user id
+     */
+    this.addLineUserId = function(lineUserId) {
+        if (lineUserId === '') return;
+
+        this.directContact.push({
+            method: IP_TXT.lineUserId, 
+            value: lineUserId
+        });
+    }
 
     /**
      * Get Line User iD
