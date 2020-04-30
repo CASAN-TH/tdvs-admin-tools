@@ -122,7 +122,7 @@ function InvolvedParty() {
             addressSubDistrict: item.addressSubDistrict,
             addressDistrict: item.addressDistrict,
             addressProvince: item.addressProvince,
-            addressPostalCode: item.addressPostalCode,
+            addressPostalCode: item.addressPostCode,
             latitude: item.latitude,
             longitude: item.longitude
         };
