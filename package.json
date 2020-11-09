@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "google-spreadsheet": "^3.0.10",
     "mongoose": "^5.9.10",
     "request": "^2.88.2"
